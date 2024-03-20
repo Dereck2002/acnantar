@@ -46,7 +46,7 @@ if (isset($_SESSION["idUsuario"])) {
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Socios</th>
-                                                    <th>Gerente</th>
+                                                    <th>Garante</th>
                                                     <th>Fecha de credito</th>
                                                     <th>Valor de credito</th>
                                                     <th>Destino de credito</th>
