@@ -26,7 +26,7 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
         case 'repetido':
             $receta_cod = $_POST['receta_cod'];    
             $datos = array();   
-            $datos = $Historial->repetido($historial_cod);   
+            $datos = $Historial->repetido($id_creditos);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;

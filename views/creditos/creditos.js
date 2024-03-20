@@ -14,22 +14,28 @@ $().ready(() => {
 var cargaTablaRoles = () => {
   var html = "";
   $.post(
-    "../../controllers/historial.controller.php?op=todos",
+    "../../controllers/creditos.controller.php?op=todos",
     (listahistorial) => {
       listahistorial = JSON.parse(listahistorial);
       $.each(listahistorial, (index, historial) => {
         html +=
           `<tr>` +
           `<td>${index + 1}</td>` +
-          `<td>${historial.paciente_apel}</td>` +
-          `<td>${historial.historial_fec}</td>` +
-          `<td>${historial.historial_det}</td>` +
-          `<td>${historial.historial_diag}</td>` +
-          `<td>${historial.historial_trat}</td>` +
+          `<td>${historial.socio}</td>` +
+          `<td>${historial.garante}</td>` +
+          `<td>${historial.fecha_credito}</td>` +
+          `<td>${historial.valor_credito}</td>` +
+          `<td>${historial.destino}</td>` +
+          `<td>${historial.plazo}</td>` +
+          `<td>${historial.valor_aprobado}</td>` +
+          `<td>${historial.plazo_aprobado}</td>` +
+          `<td>${historial.fecha_aprobacion}</td>` +
+          `<td>${historial.cuota}</td>` +
+          
           `<td>` +
-          `<button title='Modificar Atencion medica' class='btn btn-small btn-success no-imprimir' onclick='uno(${historial.historial_cod})'><i class="fa-solid fa-pen-to-square"></i></button>` +
-          `<button title='Eliminar Registro' class='btn btn-small btn-danger no-imprimir'  onclick='eliminar(${historial.historial_cod})'><i class="fa-solid fa-trash"></i></button>` +
-          `<button title='Emitir Receta Medica' class='btn btn-small btn-primary no-imprimir'  onclick='recetamedica(${historial.historial_cod}, "${historial.paciente_ced}", "${historial.medico_cod}")'><i class="fa-solid fa-notes-medical"></i></button>` +
+          `<button title='Modificar creditos' class='btn btn-small btn-success no-imprimir' onclick='uno(${historial.id_credito})'><i class="fa-solid fa-pen-to-square"></i></button>` +
+          `<button title='Eliminar credito' class='btn btn-small btn-danger no-imprimir'  onclick='eliminar(${historial.id_credito})'><i class="fa-solid fa-trash"></i></button>` +
+          `<button title='Emitir credito' class='btn btn-small btn-primary no-imprimir'  onclick='recetamedica(${historial.id_credito}, "${historial.paciente_ced}", "${historial.medico_cod}")'><i class="fa-solid fa-notes-medical"></i></button>` +
           `</td>` +
           `</tr>`;
       });
@@ -49,11 +55,11 @@ var recetamedica = (historial_cod, paciente_ced, medico_cod) => {
 var cargaSelectPacientes = () => {
   var html = ' <option value="0">Seleccione un Paciente</option>';
   $.post(
-    "../../controllers/pacientes.controller.php?op=todos",
+    "../../controllers/creditos.controller.php?op=todos",
     (listapacientes) => {
       listapacientes = JSON.parse(listapacientes);
-      $.each(listapacientes, (index, pacientes) => {
-        html += `<option value="${pacientes.paciente_ced}">${pacientes.paciente_apel}</option>`;
+      $.each(listapacientes, (index, socios) => {
+        html += `<option value="${socios.id_socio}">${socios.id_socio}</option>`;
       });
       $("#paciente_ced").html(html);
     }
@@ -75,9 +81,9 @@ var guardayeditarHistorial = (e) => {
   var form_Data = new FormData($("#usuarios_form")[0]);
   var historial_cod = document.getElementById("historial_cod").value;
   if (historial_cod === undefined || historial_cod === "") {
-    url = "../../controllers/historial.controller.php?op=insertar";
+    url = "../../controllers/creditos.controller.php?op=insertar";
   } else {
-    url = "../../controllers/historial.controller.php?op=actualizar";
+    url = "../../controllers/creditos.controller.php?op=actualizar";
   }
 
   $.ajax({
@@ -105,7 +111,7 @@ var guardayeditarReceta = (e) => {
   var url = "";
   var form_Data = new FormData($("#Recetas_form")[0]);
 
-  url = "../../controllers/recetas.controller.php?op=insertar";
+  url = "../../controllers/creditos.controller.php?op=insertar";
   $.ajax({
     url: url,
     type: "POST",
@@ -129,7 +135,7 @@ var guardayeditarReceta = (e) => {
 
 var uno = (historial_cod) => {
   $.post(
-    "../../controllers/historial.controller.php?op=uno",
+    "../../controllers/creditos.controller.php?op=uno",
     {
       historial_cod: historial_cod,
     },
@@ -159,7 +165,7 @@ var eliminar = (historial_cod) => {
   }).then((result) => {
     if (result.isConfirmed) {
       $.post(
-        "../../controllers/historial.controller.php?op=eliminar",
+        "../../controllers/creditos.controller.php?op=eliminar",
         {
           historial_cod: historial_cod,
         },

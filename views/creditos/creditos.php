@@ -36,7 +36,7 @@ if (isset($_SESSION["idUsuario"])) {
                             <div class="col-lg-12 mb-4" id="Impresion">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3" class="botones-container" >
-                                        <h6 class="m-0 font-weight-bold text-primary">ATENCION MEDICA</h6>                              
+                                        <h6 class="m-0 font-weight-bold text-primary">CREDITOS</h6>                              
                                         <button onclick="cargaSelectPacientes();cargaSelectMedicos()" class="btn btn-primary float-left no-imprimir" data-toggle="modal" data-target="#modalUsuarios"> Nuevo</button>
                                         <button onclick="imprimirJavascript()" class="btn btn-primary float-left no-imprimir" > Imprimir</button>
                                     </div>
@@ -45,12 +45,16 @@ if (isset($_SESSION["idUsuario"])) {
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Apellidos y Nombres</th>
-                                                   
-                                                    <th>Fecha</th>
-                                                    <th>Estado</th>
-                                                    <th>Diagnostico</th>
-                                                    <th>Tratamiento</th>
+                                                    <th>Socios</th>
+                                                    <th>Gerente</th>
+                                                    <th>Fecha de credito</th>
+                                                    <th>Valor de credito</th>
+                                                    <th>Destino de credito</th>
+                                                    <th>Plazo de credito</th>
+                                                    <th>Valor de aprobado</th>
+                                                    <th>Plazo Aprobado</th>
+                                                    <th>fecha de aprobacion</th>
+                                                    <th>Cuota Mensual</th>
                                                     <th>Opciones</th>
                                                 </tr>
                                             </thead>
@@ -68,17 +72,17 @@ if (isset($_SESSION["idUsuario"])) {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h6 class="modal-title" id="titulModalUsuarios">Ingresar Atención Medica</h6>
+                                <h6 class="modal-title" id="titulModalUsuarios">Registro de Credito</h6>
                                 <button type="button" onclick="limpiar()" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <form id="usuarios_form">
                                 <div class="modal-body">
-                                    <input type="hidden" name="historial_cod" id="historial_cod">
+                                    <input type="hidden" name="socio" id="socio">
                                     <div class="form-group">
-                                        <label for="pacientes" class="control-label">Pacientes</label>
-                                        <select name="paciente_ced" id="paciente_ced" class="form-control">                                         
+                                        <label for="Socio" class="control-label">Nombre del Socio</label>
+                                        <select name="socio" id="socio" class="form-control">                                         
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -159,7 +163,7 @@ if (isset($_SESSION["idUsuario"])) {
         <!--scripts-->
         <?php include_once('../html/scripts.php')  ?>
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-        <script src="./historial.js"></script>
+        <script src="./creditos.js"></script>
       
     </body>
 

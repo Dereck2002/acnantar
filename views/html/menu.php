@@ -29,7 +29,7 @@
             
             <a class="collapse-item" href="../socios/socios.php">Socios</a>
             <a class="collapse-item" href="../aportaciones/aportaciones.php">Aportaciones</a>
-            <a class="collapse-item" href="../historial/historial.php">Creditos</a>
+            <a class="collapse-item" href="../creditos/creditos.php">Creditos</a>
             <a class="collapse-item" href="../recetas/recetas.php">Pago de cuotas</a>
             <a class="collapse-item" href="../medico/medico.php">Liquidacion</a>
 

@@ -89,11 +89,11 @@ var uno = (id_aportes) => {
     (res) => {
       //console.log(res);
       res = JSON.parse(res);
-      $("#id_aportes").val(res.id_aportes);
-      $("#id_socio").val(res.id_socio);
-      $("#fecha_aportes").val(res.fecha_aportes);
-      $("#Valor_aportes").val(res.Valor_aportes);
-      $("#desc_aportes").val(res.desc_aportes);
+      $("#id_aportes").val(res.nombes);
+      $("#id_socio").val(res.fecha);
+      $("#fecha_aportes").val(res.aportes);
+      $("#Valor_aportes").val(res.descripcion);
+
     }
   );
 

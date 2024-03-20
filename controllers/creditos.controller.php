@@ -2,8 +2,8 @@
 error_reporting(0);
 //TODO: Requerimeintos
 require_once('../config/sesiones.php');
-require_once('../models/historial.model.php');
-$Historial = new HistorialModel; //TODO:Declaracion de variable
+require_once('../models/creditos.model.php');
+$Historial = new CreditosModel; //TODO:Declaracion de variable
 switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo GET
 
     case 'todos':
@@ -16,9 +16,9 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
         break;
         
         case 'uno':
-            $historial_cod = $_POST['historial_cod'];    
+            $id_creditos = $_POST['id_creditos'];    
             $datos = array();   
-            $datos = $Historial->uno($historial_cod);   
+            $datos = $Historial->uno($id_creditos);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;
@@ -26,7 +26,7 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
         case 'repetido':
             $medico_cod = $_POST['medico_cod'];    
             $datos = array();   
-            $datos = $Historial->repetido($historial_cod);   
+            $datos = $Historial->repetido($id_creditos);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;
