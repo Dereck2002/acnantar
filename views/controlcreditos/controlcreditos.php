@@ -35,13 +35,13 @@ if (isset($_SESSION["idUsuario"])) {
                     <!-- End of Topbar -->
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">MEDICOS</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Cuotos</h1>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 mb-4" id="Impresion">
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Lista de Médicos</h6>                              
+                                        <h6 class="m-0 font-weight-bold text-primary">Pagos Cuotas</h6>                              
                                         <button  onclick="asignarValor()" class="btn btn-primary float-left no-imprimir" data-toggle="modal" data-target="#modalUsuarios"> Nuevo</button>                                   
                                         <button  onclick="imprimirJavascript()" class="btn btn-primary float-left no-imprimir" > Imprimir</button>                                   
                                     
@@ -51,12 +51,12 @@ if (isset($_SESSION["idUsuario"])) {
                                             <thead class="table-dark">
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Cedula</th>
-                                                    <th>Apellidos y Nombres</th>
-                                                  
-                                                    <th>Especialidad</th>
-                                                    <th>Telefono</th>
-                                                    <th>Correo</th>
+                                                    <th>Creditos</th>
+                                                    <th>Socios</th>
+                                                    <th>Fecha de pago</th>
+                                                    <th>Cuota pagada</th>
+                                                    <th>Opciones</th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody id='TablaUsuarios'></tbody>
@@ -125,7 +125,7 @@ if (isset($_SESSION["idUsuario"])) {
         </a>
         <!--scripts-->
         <?php include_once('../html/scripts.php')  ?>
-        <script src="./medico.js"></script>
+        <script src="./controlcreditos.js"></script>
 
     </body>
 

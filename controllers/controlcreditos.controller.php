@@ -2,8 +2,8 @@
 error_reporting(0);
 //TODO: Requerimeintos
 require_once('../config/sesiones.php');
-require_once('../models/medico.model.php');
-$Medico = new MedicoModel; //TODO:Declaracion de variable
+require_once('../models/controlcreditos.model.php');
+$Medico = new controlcreditosModel; //TODO:Declaracion de variable
 switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo GET
 
     case 'todos':
@@ -16,23 +16,23 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
         break;
         
         case 'uno':
-            $medico_cod = $_POST['medico_cod'];    
+            $id_control = $_POST['id_control'];    
             $datos = array();   
-            $datos = $Medico->uno($medico_cod);   
+            $datos = $Medico->uno($id_control);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;
         
         case 'repetido':
-            $medico_cod = $_POST['medico_cod'];    
+            $id_control = $_POST['id_control'];    
             $datos = array();   
-            $datos = $Medico->repetido($medico_cod);   
+            $datos = $Medico->repetido($id_control);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;
 
         case 'insertar':
-            $medico_cod = $_POST['medico_cod'];
+            $id_control = $_POST['id_control'];
             $medico_ape = $_POST['medico_ape'];
             
             $medico_esp = $_POST['medico_esp'];
@@ -45,22 +45,22 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
             break;
     
             case 'actualizar':
-                $medico_cod = $_POST['medico_cod'];
+                $id_control = $_POST['id_control'];
                 $medico_ape = $_POST['medico_ape'];               
                 $medico_esp = $_POST['medico_esp'];
                 $medico_tel = $_POST['medico_tel'];
                 $medico_cor = $_POST['medico_cor'];     
                 $datos = array();        
-                $datos = $Medico->Actualizar($medico_cod,$medico_ape,$medico_esp,$medico_tel,$medico_cor);        
+                $datos = $Medico->Actualizar($id_control,$medico_ape,$medico_esp,$medico_tel,$medico_cor);        
                 //$respuesta = mysqli_fetch_assoc($datos);        
                 echo json_encode($datos);        
                 break;
         
             case 'eliminar':        
-                $medico_cod = $_POST['medico_cod'];
+                $id_control = $_POST['id_control'];
                      
                 $datos = array();        
-                $datos = $Medico->Eliminar($medico_cod);       
+                $datos = $Medico->Eliminar($id_control);       
                //$respuesta = mysqli_fetch_assoc($datos);       
                 echo json_encode($datos);       
                 break;    

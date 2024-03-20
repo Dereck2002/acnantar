@@ -10,20 +10,20 @@ $().ready(() => {
 });
 var cargaTablaUsuarios = () => {
   var html = "";
-  $.post("../../controllers/medico.controller.php?op=todos", (listamedico) => {
+  $.post("../../controllers/controlcreditos.controller.php?op=todos", (listamedico) => {
     listamedico = JSON.parse(listamedico);
     $.each(listamedico, (index, medico) => {
       html +=
         `<tr>` +
         `<td>${index + 1}</td>` +
-        `<td>${medico.medico_cod}</td>` +
-        `<td>${medico.medico_ape}</td>` +
-        `<td>${medico.medico_esp}</td>` +
-        `<td>${medico.medico_tel}</td>` +
-        `<td>${medico.medico_cor}</td>` +
+        `<td>${medico.creditos}</td>` +
+        `<td>${medico.socios}</td>` +
+        `<td>${medico.fecha_pago}</td>` +
+        `<td>${medico.cuota_pagada}</td>` +
+
         `<td>` +
-        `<button class='btn btn-success no-imprimir' onclick='uno(${medico.medico_cod})'><i class="fa-solid fa-pen-to-square"></i></button>` +
-        `<button class='btn btn-danger no-imprimir' onclick='eliminar(${medico.medico_cod})'><i class="fa-solid fa-trash"></i></button>` +
+        `<button class='btn btn-success no-imprimir' onclick='uno(${medico.id_control})'><i class="fa-solid fa-pen-to-square"></i></button>` +
+        `<button class='btn btn-danger no-imprimir' onclick='eliminar(${medico.id_control})'><i class="fa-solid fa-trash"></i></button>` +
         `</td>` +
         `</tr>`;
     });
@@ -37,9 +37,9 @@ var guardayeditarMedico = (e) => {
   var form_Data = new FormData($("#usuarios_form")[0]);
   var medico_cod = document.getElementById("bandera").value;
   if (medico_cod === undefined || medico_cod === "") {
-    url = "../../controllers/medico.controller.php?op=actualizar";
+    url = "../../controllers/controlcreditos.controller.php?op=actualizar";
   } else {
-    url = "../../controllers/medico.controller.php?op=insertar";
+    url = "../../controllers/controlcreditos.controller.php?op=insertar";
   }
 
   $.ajax({
@@ -63,27 +63,27 @@ var guardayeditarMedico = (e) => {
   });
 };
 
-var uno = (medico_cod) => {
+var uno = (id_control) => {
   $.post(
-    "../../controllers/medico.controller.php?op=uno",
+    "../../controllers/controlcreditos.controller.php?op=uno",
     {
-      medico_cod: medico_cod,
+      id_control: id_control,
     },
     (res) => {
       console.log(res);
       res = JSON.parse(res);
-      $("#medico_cod").val(res.medico_cod);
-      $("#medico_ape").val(res.medico_ape);
+      $("#id_control").val(res.id_control);
+      $("#id_socios").val(res.id_socios);
 
-      $("#medico_esp").val(res.medico_esp);
-      $("#medico_tel").val(res.medico_tel);
-      $("#medico_cor").val(res.medico_cor);
+      $("#fecha_pago").val(res.fecha_pago);
+      $("#cuota_pagada").val(res.cuota_pagada);
+
     }
   );
   document.getElementById("titulModalUsuarios").innerHTML = "Editar Medicos";
   $("#modalUsuarios").modal("show");
 };
-var eliminar = (medico_cod) => {
+var eliminar = (id_control) => {
   Swal.fire({
     title: "MEDICOS",
     text: "Esta seguro que desea eliminar...???",
@@ -95,9 +95,9 @@ var eliminar = (medico_cod) => {
   }).then((result) => {
     if (result.isConfirmed) {
       $.post(
-        "../../controllers/medico.controller.php?op=eliminar",
+        "../../controllers/controlcreditos.controller.php?op=eliminar",
         {
-          medico_cod: medico_cod,
+          id_control: id_control,
         },
         (res) => {
           res = JSON.parse(res);
@@ -115,7 +115,7 @@ var eliminar = (medico_cod) => {
 };
 
 var limpiar = () => {
-  document.getElementById("medico_cod").value = "";
+  document.getElementById("id_control").value = "";
 
   $("#medico_ape").val("");
   $("#medico_esp").val("");
@@ -157,10 +157,10 @@ function verificarCedulaEcuador(cedula) {
 }
 
 var repetido = () => {
-  var medico_cod = document.getElementById("medico_cod").value;
+  var id_control = document.getElementById("id_control").value;
   $.post(
-    "../../controllers/medico.controller.php?op=repetido",
-    { medico_cod: medico_cod },
+    "../../controllers/controlcreditos.controller.php?op=repetido",
+    { id_control: id_control },
     (datos) => {
       datos = JSON.parse(datos);
 
@@ -171,8 +171,8 @@ var repetido = () => {
         //console.log("La cédula no es válida");
         //document.getElementById("mensaje").innerHTML =
         //("Atención: Medico ya existe");
-        document.getElementById("medico_cod").value = "";
-        document.getElementById("medico_cod").focus();
+        document.getElementById("id_control").value = "";
+        document.getElementById("id_control").focus();
       } else {
         $("#mensaje").addClass("d-none");
         $("button[type='submit']").prop("disabled", false);
@@ -194,8 +194,8 @@ function validarCedula(cedula) {
     console.log("La cédula no es válida");
     document.getElementById("mensaje").innerHTML =
       "Error: Digite cedula correcta";
-    document.getElementById("medico_cod").value = "";
-    document.getElementById("medico_cod").focus();
+    document.getElementById("id_control").value = "";
+    document.getElementById("id_control").focus();
   } else {
     document.getElementById("mensaje").innerHTML = "";
   }

@@ -1,33 +1,33 @@
 <?php
 //TODO: archivos requeridos
 require_once('../config/config.php');
-class MedicoModel
+class controlcreditosModel
 {
     public function todos(){  //TODO: CProcedimeinto para obtener todos los registros de la BDD
         $con = new ClaseConexion();
         $con = $con->ProcedimientoConectar();
-        $cadena = "SELECT * FROM medico order by medico_ape ASC";
+        $cadena = "SELECT  `id_creditos` creditos, `id_socios` socios, `fecha_pago` fecha_pago, `cuota_pagada` cuota_pagada FROM `controlcreditos` WHERE 1";
         $datos = mysqli_query($con,$cadena);
         return $datos;
     }
-    public function uno($medico_cod){
+    public function uno($id_control){
         $con = new ClaseConexion();
         $con = $con->ProcedimientoConectar();
-        $cadena = "SELECT * FROM medico where medico_cod=$medico_cod";
+        $cadena = "SELECT * FROM controlcreditos where id_control=$id_control";
         $datos = mysqli_query($con, $cadena);
         return $datos;
     }  
-    public function repetido($medico_cod){
+    public function repetido($id_control){
         $con = new ClaseConexion();
         $con = $con->ProcedimientoConectar();
-        $cadena = "SELECT count(medico_cod) as codigomed FROM medico where medico_cod=$medico_cod";
+        $cadena = "SELECT count(id_control) as codigomed FROM controlcreditos where id_control=$id_control";
         $datos = mysqli_query($con, $cadena);
         return $datos;
     }  
-    public function Insertar($medico_cod,$medico_ape,$medico_esp,$medico_tel,$medico_cor){
+    public function Insertar($id_control,$id_creditos,$id_socios,$fecha_pago,$cuota_pagada){
         $con = new ClaseConexion();
         $con = $con->ProcedimientoConectar();
-        $cadena = "INSERT INTO `medico`(`medico_cod`,`medico_ape`,`medico_esp`,`medico_tel`,`medico_cor`) VALUES ('$medico_cod','$medico_ape','$medico_esp','$medico_tel','$medico_cor')";
+        $cadena = "INSERT INTO `controlcreditos`(`id_control`,`id_creditos`,`id_socios`,`fecha_pago`,`cuota_pagada`) VALUES ('$id_control','$id_creditos','$id_socios','$fecha_pago','$cuota_pagada')";
         if (mysqli_query($con, $cadena)){
             return 'ok';
         }else{
@@ -37,20 +37,20 @@ class MedicoModel
         
     }
 
-    public function Actualizar($medico_cod,$medico_ape,$medico_esp,$medico_tel,$medico_cor){
+    public function Actualizar($id_control,$id_creditos,$id_socios,$fecha_pago,$cuota_pagada){
         $con = new ClaseConexion();
         $con=$con->ProcedimientoConectar();
-        $cadena = "UPDATE medico SET medico_cod='$medico_cod', medico_ape='$medico_ape', medico_esp='$medico_esp', medico_tel='$medico_tel', medico_cor='$medico_cor' WHERE medico_cod=$medico_cod";
+        $cadena = "UPDATE controlcreditos SET id_control='$id_control', id_creditos='$id_creditos', id_socios='$id_socios', fecha_pago='$fecha_pago', cuota_pagada='$cuota_pagada' WHERE id_control=$id_control";
         if (mysqli_query($con, $cadena)){
             return 'ok';
         }else{
             return mysqli_error($con);
         }
     }
-    public function Eliminar($medico_cod){
+    public function Eliminar($id_control){
         $con = new ClaseConexion();
         $con=$con->ProcedimientoConectar();
-        $cadena = "DELETE FROM `medico` WHERE medico_cod=$medico_cod ";
+        $cadena = "DELETE FROM `controlcreditos` WHERE id_control=$id_control";
         if (mysqli_query($con, $cadena)){
             return 'ok';
         }else{

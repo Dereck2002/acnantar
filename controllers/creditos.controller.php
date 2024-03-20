@@ -24,9 +24,9 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
             break;
         
         case 'repetido':
-            $medico_cod = $_POST['medico_cod'];    
+            $id_control = $_POST['id_control'];    
             $datos = array();   
-            $datos = $Historial->repetido($id_creditos);   
+            $datos = $Historial->repetido($id_control);   
             $respuesta = mysqli_fetch_assoc($datos);   
             echo json_encode($respuesta);   
             break;
@@ -37,9 +37,9 @@ switch ($_GET['op']) {  //TODO: Clausula de desicion para obtener variable tipo 
             $historial_diag = $_POST['historial_diag'];
             $historial_trat = $_POST['historial_trat'];
             $paciente_ced = $_POST['paciente_ced'];
-            $medico_cod= $_POST['medico_cod'];
+            $id_control= $_POST['id_control'];
             $datos = array();
-            $datos = $Historial->Insertar($historial_det, $historial_diag, $historial_trat, $paciente_ced,$medico_cod);
+            $datos = $Historial->Insertar($historial_det, $historial_diag, $historial_trat, $paciente_ced,$id_control);
             echo json_encode($datos);
             break;
     
